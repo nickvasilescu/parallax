@@ -405,14 +405,12 @@ public and not deleted, so the library's own delete and "make private" also hide
 Status: 1 and 2 are done. Profile editing is `PATCH /api/account/profile` (see `account.md`), and
 `/api/assets/<id>/file` now serves a member's current profile picture to everyone. 3 and 4 are open.
 
-1. **Profile editing.** `users.name`, `bio` and `avatar_asset_id` exist but no route changes them,
-   and this feature may not write core tables. Request: `PATCH /api/auth/me { name?, bio?, avatarAssetId? }`
-   in the core auth routes (name ≤ 60, bio ≤ 300, avatar must be the member's own image).
-2. **Avatars visible to others.** `avatarUrl` points at `/api/assets/<id>/file`, which only serves
-   the owner or public files, so other people get a 404 for a private avatar. Request: let
-   `visibleAsset()` also allow any asset that is some user's `avatar_asset_id`, or have the avatar
-   route set `is_public` on the chosen file. Until then, screens should fall back to initials when
-   the image fails to load.
+1. **Profile editing.** Done. `PATCH /api/account/profile` changes `name`, `handle`, `bio` and
+   `avatarAssetId` (`null` clears the picture). Send only the fields that change. Full field
+   rules and errors are in `account.md`.
+2. **Avatars visible to others.** Done. `visibleAsset()` serves any asset that is some member's
+   `avatar_asset_id`, so a profile picture loads for every viewer for as long as its owner keeps
+   it as their picture.
 3. **Moderator role.** Reports are stored but there is no moderator flag on `users`. Request: a
    `role` column (or an `admins` table) plus a moderation surface that can list
    `community_reports WHERE status = 'open'` and take a post down.
