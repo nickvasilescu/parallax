@@ -119,6 +119,7 @@ Everything is optional. Put them in `.env.local`.
 | `PARALLAX_DEMO_SEED` | `1` adds the demo accounts and posts to a new data folder |
 | `PARALLAX_DEMO_BILLING` | `off` closes the free top-up button |
 | `PARALLAX_ORIGIN` | The public address of the app when it runs behind a proxy or a public link, for example `https://parallax.example.com`. The server writes its links with it and accepts requests from pages at that address |
+| `PARALLAX_TRUSTED_PROXIES` | How many reverse proxies sit in front of the app (for example `1` for one nginx or Caddy). Rate limits use the client address that many entries from the right in `X-Forwarded-For`. Leave it unset when nothing is in front: the header is then ignored, because a client can forge it, and all callers share one limit |
 | `COOKIE_SECURE` | `1` when serving over https |
 | `SUPER_MODE` | `live` lets Supercomputer use the three keys below |
 | `ANTHROPIC_API_KEY`, `ORGO_API_KEY`, `COMPOSIO_API_KEY` | The agent's model, its cloud computer, and its app connections |

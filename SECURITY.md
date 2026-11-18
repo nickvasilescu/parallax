@@ -9,6 +9,7 @@ steps to reproduce it.
 **Before you put it on the internet**
 
 - Serve it over HTTPS and set `COOKIE_SECURE=1` and `PARALLAX_ORIGIN`.
+- Behind a reverse proxy, set `PARALLAX_TRUSTED_PROXIES` to the number of proxies in front. Without it, rate limits ignore `X-Forwarded-For` and every caller shares one limit.
 - Set `TREG_DAILY_BUDGET_USD`. It caps what the server can spend in a day.
 - Payments are not connected. Credits are granted by the app itself; do not sell them.
 - If Supercomputer runs on a Hermes agent, read the warning in

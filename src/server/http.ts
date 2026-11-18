@@ -116,6 +116,27 @@ export function rateLimit(key: string, max: number, windowMs: number) {
   if (++b.n > max) throw new ApiError(429, "rate_limited", "Too many attempts. Wait a few minutes and try again.");
 }
 
+/** How many reverse proxies sit in front of the app and append to X-Forwarded-For. 0 when unset or invalid. */
+function trustedProxies(): number {
+  const n = Number(process.env.PARALLAX_TRUSTED_PROXIES);
+  return Number.isInteger(n) && n > 0 && n <= 5 ? n : 0;
+}
+
+/**
+ * Who is calling, for rate limits and anonymous counters.
+ *
+ * X-Forwarded-For is written by the caller, so a client that reaches the app directly can
+ * send a new value on every request and never hit a limit. The header is therefore ignored
+ * unless the operator says how many trusted proxies are in front (PARALLAX_TRUSTED_PROXIES).
+ * Each trusted proxy appends the address it saw, so the client is that many entries from the
+ * right; anything further left was supplied by the client and is not read.
+ *
+ * Without the setting every caller shares the key "local": limits are then global, which is
+ * strict but cannot be dodged.
+ */
 export function clientKey(req: NextRequest): string {
-  return (req.headers.get("x-forwarded-for") ?? "local").split(",")[0].trim();
+  const hops = trustedProxies();
+  if (hops === 0) return "local";
+  const chain = (req.headers.get("x-forwarded-for") ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+  return chain[chain.length - hops] ?? "local";
 }

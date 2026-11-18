@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13
+          cache: npm
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run check:registry
+      - run: npm run build
+
+      # API tests only. They start the built app in mock mode with every key removed, so
+      # nothing here can spend money. The .mjs browser walk-throughs need Chrome and are not run.
+      - name: API tests
+        run: python3 tests/run.py $(ls tests/*.py | grep -v tests/run.py)
