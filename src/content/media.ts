@@ -3,8 +3,10 @@
  * `Artwork` component in "@/ui" looks it up here. A name that is not listed is drawn as a
  * soft dark gradient, so a page is complete before its pictures exist.
  *
- * Every file listed here is our own: made with Parallax or drawn for it, and stored under
- * /public/media. Never add a picture taken from another product or from the design.
+ * Every file listed here must be original to this project (an AI-generated sample or a
+ * drawing made for it) and stored under /public/media. Never add a picture taken from another
+ * product, a stock library or a design reference, and never a real person's likeness, a
+ * brand's logo or a copyrighted character.
  */
 export const media: Record<string, string> = {
   "sample/1": "/media/hero/tile-1.jpg",

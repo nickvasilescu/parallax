@@ -31,7 +31,7 @@ Open http://localhost:3000. You can try it as a guest with a few credits. Signin
 what you made as a guest.
 
 `PARALLAX_DEMO_SEED=1` fills a new install with four house accounts and about sixty published
-pictures. Every one was made with Parallax, and each post carries the prompt that made it, so
+pictures. They are AI-generated samples, and each post carries a prompt and a model id, so
 Recreate works on all of them. Nobody can sign in as the demo accounts. Leave the variable
 out for an empty feed.
 
