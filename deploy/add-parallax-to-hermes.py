@@ -4,10 +4,10 @@
 Run it on the agent's machine, with the Python that Hermes uses (it needs PyYAML):
 
     python3 add-parallax-to-hermes.py --token-file /path/to/engine.token
-        [--url http://127.0.0.1:13100/api/super/mcp]
+        [--url http://127.0.0.1:13100/api/agent/mcp]
         [--config ~/.hermes/config.yaml] [--name parallax] [--remove] [--dry-run]
 
-The token file holds the same value as Parallax's SUPER_ENGINE_TOKEN. It is written into the
+The token file holds the same value as Parallax's AGENT_ENGINE_TOKEN. It is written into the
 config file (which already holds the agent's other secrets) and is never printed.
 
 The edit is plain text, so the file's comments and layout stay as they are. A dated copy of
@@ -18,7 +18,7 @@ import argparse, os, re, shutil, sys, time
 
 p = argparse.ArgumentParser()
 p.add_argument('--config', default=os.path.expanduser('~/.hermes/config.yaml'))
-p.add_argument('--url', default='http://127.0.0.1:13100/api/super/mcp')
+p.add_argument('--url', default='http://127.0.0.1:13100/api/agent/mcp')
 p.add_argument('--token-file')
 p.add_argument('--name', default='parallax')
 p.add_argument('--remove', action='store_true')

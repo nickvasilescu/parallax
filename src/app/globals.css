@@ -197,7 +197,7 @@
  */
 html[data-closed~="promo"] [data-closable="promo"],
 html[data-closed~="guide"] [data-closable="guide"],
-html[data-closed~="superGuide"] [data-closable="superGuide"],
+html[data-closed~="agentGuide"] [data-closable="agentGuide"],
 html[data-closed~="cinemaGuide"] [data-closable="cinemaGuide"] {
   display: none;
 }

@@ -26,7 +26,7 @@ export const routes = {
   contests: "/contests",
   shorts: "/shorts",
   ads: "/ads",
-  supercomputer: "/supercomputer",
+  agent: "/agent",
   canvas: "/canvas",
   apps: "/apps",
   library: "/library",
@@ -56,7 +56,7 @@ export type NavId =
   | "contests"
   | "shorts"
   | "ads"
-  | "supercomputer"
+  | "agent"
   | "canvas"
   | "apps"
   | "library"

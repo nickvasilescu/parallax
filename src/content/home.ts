@@ -62,7 +62,7 @@ export interface FeatureTile {
   title: string;
   sub: string;
   href: string;
-  icon: "remix" | "video" | "supercomputer" | "cinema" | "mcp" | "horizon";
+  icon: "remix" | "video" | "agent" | "cinema" | "mcp" | "horizon";
   /** The small label after the title, matching the top nav. */
   tag?: { label: string; tone: "brand" | "neutral" };
 }
@@ -71,7 +71,7 @@ export interface FeatureTile {
 export const featureTiles: FeatureTile[] = [
   { id: "remix", title: `${brand.name} Remix`, sub: "One clip, many takes", href: routes.remix, icon: "remix", tag: { label: "Top", tone: "brand" } },
   { id: "video", title: `${brand.name} Video`, sub: "Text and stills into motion", href: routes.video, icon: "video" },
-  { id: "supercomputer", title: "Supercomputer", sub: "An agent that runs whole projects", href: routes.supercomputer, icon: "supercomputer" },
+  { id: "agent", title: "Agent", sub: "An assistant that runs whole projects", href: routes.agent, icon: "agent" },
   { id: "cinema", title: "Shot Planner", sub: "Shots with real camera moves", href: routes.cinema, icon: "cinema" },
   { id: "mcp", title: `${brand.name} MCP`, sub: "Generate from the assistant you already use", href: routes.mcp, icon: "mcp" },
   { id: "horizon", title: `${brand.name} Horizon`, sub: "A new way to edit, in the works", href: routes.horizon, icon: "horizon", tag: { label: "Soon", tone: "neutral" } },
@@ -217,7 +217,7 @@ export const moreFeatures = {
     { label: "Remix", href: routes.remix },
     { label: "Shorts", href: routes.shorts },
     { label: "Ad Campaigns", href: routes.ads },
-    { label: "Supercomputer", href: routes.supercomputer },
+    { label: "Agent", href: routes.agent },
     { label: "Boards", href: routes.canvas },
     { label: "Apps", href: routes.apps },
     { label: "Horizon", href: routes.horizon },

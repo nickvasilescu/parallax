@@ -320,7 +320,7 @@ address; use `routes`.
 Develop against the real app in mock mode. It needs no key and spends nothing:
 
 ```bash
-TREG_MODE=mock SUPER_MODE=mock PARALLAX_DEMO_BILLING=1 PARALLAX_DATA_DIR=/tmp/px-dev npm run dev -- -p 3200
+TREG_MODE=mock AGENT_MODE=mock PARALLAX_DEMO_BILLING=1 PARALLAX_DATA_DIR=/tmp/px-dev npm run dev -- -p 3200
 ```
 
 In mock mode every model answers with a sample file after a short delay, and a prompt that

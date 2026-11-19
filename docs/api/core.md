@@ -8,7 +8,7 @@ except `GET /api/assets/:id/file`, which answers with the file's bytes. Every su
 `200` (the file route also answers `206` for a byte range). Nothing answers `201` or `204`.
 
 See also: `account.md`, `library.md`, `community.md`, `developer.md`, `apps.md`, `cinema.md`,
-`ads.md`, `super.md`, `notify.md`.
+`ads.md`, `agent.md`, `notify.md`.
 
 ## Conventions
 

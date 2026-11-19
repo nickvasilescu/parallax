@@ -57,7 +57,7 @@ def run_one(test: str) -> int:
     data = tempfile.mkdtemp(prefix="parallax-test-")
     # Tests never see a real key: outside services run as mocks, and key variables are removed.
     env = {k: v for k, v in os.environ.items() if not k.endswith(("_API_KEY", "_TOKEN"))}
-    env.update(TREG_MODE="mock", SUPER_MODE="mock", PARALLAX_DATA_DIR=data, PARALLAX_DEMO_BILLING="1")
+    env.update(TREG_MODE="mock", AGENT_MODE="mock", PARALLAX_DATA_DIR=data, PARALLAX_DEMO_BILLING="1")
     if hosts_itself(test):
         os.makedirs(os.path.join(data, "logs"))
         own = [sys.executable, test, APP, os.path.join(data, "data"), PORT]

@@ -12,7 +12,7 @@ import { cn } from "@/ui";
 const ICONS: Record<FeatureTile["icon"], typeof Film> = {
   remix: Layers,
   video: Film,
-  supercomputer: Cpu,
+  agent: Cpu,
   cinema: Clapperboard,
   mcp: Plug,
   horizon: Sparkles,

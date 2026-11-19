@@ -2,7 +2,7 @@ import { guideHint, promo } from "@/content/site";
 
 /*
  * Things a person can close for good: the promo strip, the guide hint, the guide cards in the
- * Supercomputer and Cinema side panels.
+ * agent and Shot Planner side panels.
  *
  * What is closed lives in localStorage and is mirrored onto <html data-closed="promo guide">
  * by a tiny script in the page head, before the first paint. CSS in globals.css hides
@@ -15,7 +15,7 @@ import { guideHint, promo } from "@/content/site";
 export const closable = {
   promo: promo.id,
   guide: guideHint.id,
-  superGuide: "super-guide-1",
+  agentGuide: "agent-guide-1",
   cinemaGuide: "cinema-guide-1",
 } as const;
 

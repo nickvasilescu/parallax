@@ -11,7 +11,7 @@
 #   server.log     the log
 #   env            optional extra settings, one NAME=value per line
 #   origin.txt     optional: the public https address, if the app sits behind a link or proxy
-#   engine/        optional: run Supercomputer on a Hermes agent (see docs/hermes-on-orgo.md)
+#   engine/        optional: run the agent chat on a Hermes agent (see docs/hermes-on-orgo.md)
 #     hermes-api.key   the agent's API key
 #     engine.token     the token the agent uses to call Parallax's tools
 #     name.txt         the name members see (default: Hermes)
@@ -34,12 +34,13 @@ mkdir -p "$RUN_DIR"
 "$DEPLOY_DIR/stop.sh" > /dev/null 2>&1 || true
 
 # A clean environment: the only keys the server can see are the ones in .env.local and the
-# files named below. SUPER_MODE stays mock unless deploy/run/env says otherwise, so
-# Supercomputer cannot start cloud computers or connect outside apps by accident.
+# files named below. AGENT_MODE stays mock unless deploy/run/env says otherwise, so
+# the agent cannot start cloud computers or connect outside apps by accident. (deploy/run/env
+# must use the AGENT_* names: an older SUPER_MODE line there no longer overrides this.)
 vars=(
   "PATH=$PATH" "HOME=$HOME" "NODE_ENV=production"
   "PARALLAX_DATA_DIR=$RUN_DIR/data"
-  "SUPER_MODE=mock"
+  "AGENT_MODE=mock"
 )
 if [ -s "$RUN_DIR/origin.txt" ]; then
   origin="$(tr -d ' \n\r' < "$RUN_DIR/origin.txt")"
@@ -56,9 +57,9 @@ if [ -s "$ENGINE_DIR/hermes-api.key" ] && [ -s "$ENGINE_DIR/engine.token" ] && [
   name="Hermes"
   if [ -s "$ENGINE_DIR/name.txt" ]; then name="$(head -n 1 "$ENGINE_DIR/name.txt")"; fi
   vars+=(
-    "SUPER_ENGINE=hermes" "HERMES_URL=$url" "SUPER_ENGINE_NAME=$name"
+    "AGENT_ENGINE=hermes" "HERMES_URL=$url" "AGENT_ENGINE_NAME=$name"
     "HERMES_API_KEY_FILE=$ENGINE_DIR/hermes-api.key"
-    "SUPER_ENGINE_TOKEN_FILE=$ENGINE_DIR/engine.token"
+    "AGENT_ENGINE_TOKEN_FILE=$ENGINE_DIR/engine.token"
   )
   engine="$name (Hermes)"
 fi

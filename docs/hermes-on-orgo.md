@@ -1,14 +1,14 @@
-# Supercomputer on a Hermes agent, on Orgo
+# The agent chat on a Hermes agent, on Orgo
 
-Supercomputer is Parallax's agent chat. Out of the box it answers with a scripted stand-in
-(`SUPER_MODE=mock`). This guide swaps in a real agent: a [Hermes](https://github.com/NousResearch/hermes-agent)
+The agent is Parallax's agent chat. Out of the box it answers with a scripted stand-in
+(`AGENT_MODE=mock`). This guide swaps in a real agent: a [Hermes](https://github.com/NousResearch/hermes-agent)
 agent living on an [Orgo](https://www.orgo.ai) cloud computer runs the conversation, and
 Parallax gives it the studio's tools.
 
 ```
 member ──▶ Parallax ──POST /v1/responses (stream)──▶ Hermes agent (on an Orgo computer)
                ▲                                          │
-               └────── POST /api/super/mcp (tools) ◀──────┘
+               └────── POST /api/agent/mcp (tools) ◀──────┘
 ```
 
 What you get:
@@ -20,7 +20,7 @@ What you get:
 - Members see one chat. The model picker shows your agent's name.
 
 > **Status, honestly.** The engine is tested end to end against a stand-in agent that speaks
-> the same API (`tests/super_hermes.py`, 70 checks) and in a browser. It has **not** been run
+> the same API (`tests/agent_hermes.py`, 70 checks) and in a browser. It has **not** been run
 > against a live Hermes agent yet, and `deploy/tunnel.sh` has not been used on a real pair of
 > machines. Expect to fix small things. Reports and pull requests are welcome.
 
@@ -94,7 +94,7 @@ Run Parallax on the Orgo computer the agent lives on. Everything stays on `127.0
 | | Address |
 |---|---|
 | Parallax → agent (`HERMES_URL`) | `http://127.0.0.1:8642` |
-| agent → Parallax (the MCP `url`) | `http://127.0.0.1:3000/api/super/mcp` |
+| agent → Parallax (the MCP `url`) | `http://127.0.0.1:3000/api/agent/mcp` |
 
 ```bash
 echo "http://127.0.0.1:8642" > deploy/run/engine/url.txt
@@ -130,7 +130,7 @@ Neither side needs a port open to the internet. One SSH connection carries both 
 | | Address |
 |---|---|
 | Parallax → agent (`HERMES_URL`) | `http://127.0.0.1:18642` (the default, nothing to write) |
-| agent → Parallax (the MCP `url`) | `http://127.0.0.1:13100/api/super/mcp` |
+| agent → Parallax (the MCP `url`) | `http://127.0.0.1:13100/api/agent/mcp` |
 
 `tunnel.sh` reads `PORT` if Parallax is not on 3000. "agent -> Parallax" turns to yes once
 Parallax is running (step 5).
@@ -142,7 +142,7 @@ it there, with the Python that Hermes uses:
 
 ```bash
 python3 add-parallax-to-hermes.py --token-file ./engine.token \
-  --url http://127.0.0.1:13100/api/super/mcp      # case B; use port 3000 for case A
+  --url http://127.0.0.1:13100/api/agent/mcp      # case B; use port 3000 for case A
 rm ./engine.token
 ```
 
@@ -153,7 +153,7 @@ takes it out again.
 ```yaml
 mcp_servers:
   parallax:
-    url: "http://127.0.0.1:13100/api/super/mcp"
+    url: "http://127.0.0.1:13100/api/agent/mcp"
     headers:
       Authorization: "Bearer <engine token>"
     timeout: 2100          # a render plus an approval can take many minutes
@@ -177,11 +177,11 @@ folder switches back.
 Not using the deploy scripts? These are the settings (`.env.local` or the environment):
 
 ```bash
-SUPER_ENGINE=hermes
+AGENT_ENGINE=hermes
 HERMES_URL=http://127.0.0.1:8642
 HERMES_API_KEY_FILE=/absolute/path/to/hermes-api.key
-SUPER_ENGINE_TOKEN_FILE=/absolute/path/to/engine.token
-SUPER_ENGINE_NAME=Hermes
+AGENT_ENGINE_TOKEN_FILE=/absolute/path/to/engine.token
+AGENT_ENGINE_NAME=Hermes
 ```
 
 A live agent is closed to everyone until you name who may use it. Add your own account's
@@ -193,7 +193,7 @@ AGENT_ALLOWED_EMAILS=you@example.com
 
 ## Step 6. Try it
 
-1. Open `/supercomputer` and send: *"Make me a poster of a lighthouse at dusk."*
+1. Open `/agent` and send: *"Make me a poster of a lighthouse at dusk."*
 2. The model pill should show your agent's name once the chat exists.
 3. The agent should call `generate_media`. You get an approval card with the price.
 4. Approve. The picture appears in the chat and in your library.
@@ -207,7 +207,7 @@ AGENT_ALLOWED_EMAILS=you@example.com
 | "The engine did not accept our key." | `hermes-api.key` is not the agent's `API_SERVER_KEY`. |
 | The agent answers but never makes anything | The `parallax` MCP entry is missing or its `url` does not reach Parallax from the agent's computer. Try `curl -s -o /dev/null -w '%{http_code}' <url>` there: 401 means it reaches Parallax (no token sent), anything else means it does not. |
 | 401 in the agent's MCP log | The token in `config.yaml` is not the one in `engine.token`. |
-| 404 from `/api/super/mcp` | Parallax is running the built-in engine. |
+| 404 from `/api/agent/mcp` | Parallax is running the built-in engine. |
 | A long render is cut off | `timeout` in the MCP entry is too low. Keep it above 2100. |
 
 ## What the agent can and cannot do in Parallax
@@ -217,9 +217,9 @@ Offered: `generate_media`, `list_models`, `get_model`, `quote`, `search_library`
 member who sent the message, so it uses their credits and their library.
 
 Not offered: Parallax's connected apps (the agent has its own), and the `computer_*` tools
-unless Parallax's own cloud computer is live (`SUPER_MODE=live` with an Orgo key).
+unless Parallax's own cloud computer is live (`AGENT_MODE=live` with an Orgo key).
 
-The technical reference is the "Engines" section of [`docs/api/super.md`](api/super.md).
+The technical reference is the "Engines" section of [`docs/api/agent.md`](api/agent.md).
 
 ## Next steps, if you want to build on this
 

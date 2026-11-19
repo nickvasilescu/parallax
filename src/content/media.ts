@@ -284,16 +284,16 @@ export const media: Record<string, string> = {
   "shorts/idea-vinyl": "/media/shorts/idea-vinyl.jpg",
   "shorts/idea-vinyl-frame": "/media/shorts/idea-vinyl.jpg",
 
-  // super
-  "super/guide-1": "/media/super/guide-1.jpg",
-  "super/guide-2": "/media/super/guide-2.jpg",
-  "super/guide-3": "/media/super/guide-3.jpg",
-  "super/showcase-sc-ad-angles": "/media/super/showcase-sc-ad-angles.jpg",
-  "super/showcase-sc-explainer": "/media/super/showcase-sc-explainer.jpg",
-  "super/showcase-sc-lighthouse": "/media/super/showcase-sc-lighthouse.jpg",
-  "super/showcase-sc-research": "/media/super/showcase-sc-research.jpg",
-  "super/showcase-sc-soundtrack": "/media/super/showcase-sc-soundtrack.jpg",
-  "super/showcase-sc-storyboard": "/media/super/showcase-sc-storyboard.jpg",
+  // agent
+  "agent/guide-1": "/media/agent/guide-1.jpg",
+  "agent/guide-2": "/media/agent/guide-2.jpg",
+  "agent/guide-3": "/media/agent/guide-3.jpg",
+  "agent/showcase-sc-ad-angles": "/media/agent/showcase-sc-ad-angles.jpg",
+  "agent/showcase-sc-explainer": "/media/agent/showcase-sc-explainer.jpg",
+  "agent/showcase-sc-lighthouse": "/media/agent/showcase-sc-lighthouse.jpg",
+  "agent/showcase-sc-research": "/media/agent/showcase-sc-research.jpg",
+  "agent/showcase-sc-soundtrack": "/media/agent/showcase-sc-soundtrack.jpg",
+  "agent/showcase-sc-storyboard": "/media/agent/showcase-sc-storyboard.jpg",
 
   // video
   "video/example-chef-flame": "/media/video/example-chef-flame.jpg",

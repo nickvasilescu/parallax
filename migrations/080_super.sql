@@ -1,4 +1,4 @@
--- Supercomputer: the agent chat. Times are Unix milliseconds.
+-- The agent chat. Times are Unix milliseconds.
 
 CREATE TABLE super_projects (
   id           TEXT PRIMARY KEY,
