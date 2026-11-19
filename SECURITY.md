@@ -36,8 +36,9 @@ effort: there is no bounty and no guaranteed response time.
   files, memory) are not behind Parallax's approval cards. Use a narrow agent on its own
   machine (see [`docs/hermes-on-orgo.md`](docs/hermes-on-orgo.md)). A live agent is closed
   until you list who may use it in `AGENT_ALLOWED_EMAILS`; keep that list short.
-- **Use computer-scoped Orgo keys.** Give Parallax an Orgo key limited to the computers it
-  needs, never an account-wide key.
+- **Use the narrowest Orgo key you can.** Never your main account key. Make a workspace-scoped
+  key (`orgo api-keys create --workspace <id>`) for a workspace that holds only the computers
+  Parallax starts.
 - **Never show keys on screen.** When you record, stream or take screenshots, keep
   `.env.local`, terminal output and the new-key dialog out of view. Rotate any key that was
   shown.

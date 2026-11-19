@@ -762,18 +762,6 @@
    "ageMinutes": 12737
   },
   {
-   "file": "apps-pixel-hero.webp",
-   "title": "Cliff hero",
-   "tags": [
-    "pixel-art"
-   ],
-   "member": "paper-kite",
-   "model": "flux-schnell",
-   "aspect": "1:1",
-   "prompt": "A 16-bit pixel art hero with a sword standing on a grassy cliff, retro video game style, no text, no lettering, no logo, no watermark",
-   "ageMinutes": 12964
-  },
-  {
    "file": "shorts-idea-desert-run.webp",
    "title": "Crest",
    "tags": [
