@@ -1,4 +1,4 @@
-// The Canvas pages: the landing as a visitor, then a board from first note to an exported PNG.
+// The Boards pages (/canvas): the landing as a visitor, then a board from first note to an exported PNG.
 // Run it with: python3 tests/run.py tests/ui/canvas.mjs
 // (the runner starts the app in mock mode and calls: node tests/ui/canvas.mjs <base-url> <out-dir> [width] [height])
 import { launch, scenario } from "./browser.mjs";

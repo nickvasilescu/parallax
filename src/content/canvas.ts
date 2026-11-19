@@ -1,11 +1,11 @@
 /**
- * The Canvas pages' own words. Layout and style come from the design; every line here is
+ * The Boards pages' own words (/canvas). Layout and style come from the design; every line here is
  * Parallax's. Keep each line about as long as the one it replaces so the layout holds.
  */
 export const canvasCopy = {
-  meta: { landing: "Canvas", board: "Canvas board" },
+  meta: { landing: "Boards", board: "Board" },
   hero: {
-    eyebrow: "Parallax Canvas",
+    eyebrow: "Parallax Boards",
     line1: "Lay out ideas",
     line2: "on an open canvas",
     note: "A quiet harbour at first light, two rowing boats tied to the pier, gulls over calm water and soft fog rolling in.",
@@ -13,7 +13,7 @@ export const canvasCopy = {
     bubble: "Love this one!",
     cursorLabel2: "Me",
   },
-  tabs: { label: "Canvas lists", all: "All Canvases", templates: "Templates", templatesTag: "Quick Start" },
+  tabs: { label: "Board lists", all: "All boards", templates: "Templates", templatesTag: "Quick Start" },
   search: { open: "Search canvases", label: "Search canvases", placeholder: "Search by name", clear: "Clear search", close: "Close search" },
   newCanvas: "New canvas",
   signedOut: { text: "Sign in to view your canvases", action: "Sign in" },
@@ -66,7 +66,7 @@ export const canvasCopy = {
   templateUse: (name: string) => `Start a canvas from ${name}`,
   board: {
     back: "All canvases",
-    name: "Canvas name",
+    name: "Board name",
     localNote: "Kept in this browser only",
     addPictures: "Your pictures",
     addNote: "Note",

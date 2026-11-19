@@ -288,7 +288,7 @@ and shown as `soon`, so a bad entry can never run.
 | Video tools | 12 | Bring a photo to life, Camera move, Frame to frame, Product turntable, Talking photo, Big reveal, Time-lapse, Weather change, Aerial flyover, Product ad, Cinemagraph, Story short |
 | Effects | 17 | 12 one-tap video effects (Levitate, Melt, Turn to stone, Confetti burst, ...) and 5 image effects (Clay me, Boxed figure, Royal pet portrait, Pixel hero, Plush toy) |
 | Templates | 10 | Event poster, Video thumbnail, Greeting card, Sticker pack, Comic strip, Seamless pattern, Tattoo idea, Shop listing set, Jingle (audio), Voice-over (audio) |
-| Soon | 13 | Upscale, Remove background, Face swap, Paint to edit, Split into layers, Video upscale, Extend a clip, Video face swap, Lip sync, Motion transfer, Video background removal, Reframe, Smooth motion |
+| Soon | 13 | Upscale, Remove background, Face swap, Paint to edit, Split into layers, Video upscale, Extend a clip, Video face swap, Lip sync, Motion transfer, Video background removal, Change aspect ratio, Smooth motion |
 
 The `soon` apps need models the registry does not have (upscalers, matting, face identity, masks,
 lip sync, anything that takes a video in).

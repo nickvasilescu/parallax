@@ -150,7 +150,7 @@ function Workspace() {
   );
 }
 
-/** The Cinema studio: plan a film shot by shot, then make stills and takes for each shot. */
+/** The Shot Planner: plan a film shot by shot, then make stills and takes for each shot. */
 export function CinemaStudio() {
   return (
     <CinemaProvider>

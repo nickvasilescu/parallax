@@ -85,12 +85,12 @@ export const navPrimary: NavLink[] = [
 
 /** Right of the divider: the studios. */
 export const navStudios: NavLink[] = [
-  { id: "cinema", href: routes.cinema, label: "Cinema Studio" },
+  { id: "cinema", href: routes.cinema, label: "Shot Planner" },
   { id: "remix", href: routes.remix, label: "Remix", tag: { label: "Top", tone: "brand" } },
   { id: "horizon", href: routes.horizon, label: "Horizon", tag: { label: "Soon", tone: "neutral" } },
   { id: "contests", href: routes.contests, label: "Contests", chrome: true },
   { id: "shorts", href: routes.shorts, label: "Shorts", tag: { label: "New", tone: "neutral" } },
-  { id: "ads", href: routes.ads, label: "Ads Studio" },
+  { id: "ads", href: routes.ads, label: "Ad Campaigns" },
 ];
 
 /**

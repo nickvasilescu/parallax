@@ -611,7 +611,7 @@ const pill =
   "inline-flex h-8 items-center justify-center rounded-full bg-text-primary px-[15px] text-xs leading-[18px] font-semibold whitespace-nowrap text-ink transition-colors duration-150 hover:bg-text-soft disabled:opacity-40";
 
 /**
- * /canvas/board?id=… : one canvas. `?new=1[&template=…]` makes a fresh one and swaps the
+ * /canvas/board?id=… : one board. `?new=1[&template=…]` makes a fresh one and swaps the
  * address to its id. Everything is kept in this browser (see store.ts).
  */
 export function CanvasBoard() {

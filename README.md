@@ -101,7 +101,7 @@ Two things to know before you start:
 - **Supercomputer's live mode.** `SUPER_MODE=live` can start cloud computers and connect
   outside apps, and both can cost money. It has had far less testing than the studios.
 - **The Hermes engine against a real agent.** See above.
-- **Canvas** boards live in the browser only. **Horizon** is a preview page.
+- **Boards** (`/canvas`) live in the browser only. **Horizon** is a preview page.
 - **Offers.** There is an optional offer strip and discount badge (`promo` and
   `pricingBadge` in `src/content/site.ts`). Both are off by default and hold placeholder text.
 

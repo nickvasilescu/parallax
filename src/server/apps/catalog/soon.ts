@@ -23,6 +23,6 @@ export const soonApps: AppDef[] = [
   soon("lip-sync", "Lip sync", "video-tool", "Match a person's lips to new audio.", ["voice", "talking"], "Needs a lip-sync model.", "video"),
   soon("motion-transfer", "Motion transfer", "video-tool", "Copy the moves from one video onto your character.", ["motion", "dance"], NOTE_VIDEO, "video"),
   soon("video-background", "Video background removal", "video-tool", "Cut a moving subject out of its background.", ["background", "video"], NOTE_VIDEO, "video"),
-  soon("reframe", "Reframe", "video-tool", "Change a clip's shape, keeping the action in frame.", ["aspect", "video"], NOTE_VIDEO, "video"),
+  soon("reframe", "Change aspect ratio", "video-tool", "Change a clip's shape, keeping the action in frame.", ["aspect", "video"], NOTE_VIDEO, "video"),
   soon("fps-boost", "Smooth motion", "video-tool", "Raise a clip's frame rate for smoother motion.", ["frame rate", "video"], NOTE_VIDEO, "video"),
 ];

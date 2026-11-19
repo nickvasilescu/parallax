@@ -1,4 +1,4 @@
-# Cinema studio API
+# Shot Planner API (`/cinema`)
 
 A film-making workspace. A member plans a **project** as ordered **scenes**, each holding
 ordered **shots**. A project also has **elements**: characters, locations and props, each

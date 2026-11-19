@@ -1,10 +1,10 @@
 /**
- * Every word on the Cinema studio screen. The layout comes from the design; the words
+ * Every word on the Shot Planner screen (/cinema). The layout comes from the design; the words
  * here are ours.
  */
 export const cinema = {
-  title: "Cinema",
-  studioName: "Cinema studio",
+  title: "Shot Planner",
+  studioName: "Shot planner",
   homeLabel: "Back to the Parallax home page",
   headline: "Direct every shot",
   nav: {

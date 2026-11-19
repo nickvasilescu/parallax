@@ -150,7 +150,7 @@ export const guideCopy = {
       { id: "image", href: routes.image, name: "Image", text: "Stills from a prompt, with references for faces, products and style." },
       { id: "video", href: routes.video, name: "Video", text: "Short shots from text, a start frame or a reference clip." },
       { id: "audio", href: routes.audio, name: "Audio", text: "Voices from a script and music from a short description." },
-      { id: "cinema", href: routes.cinema, name: "Cinema Studio", text: "Camera, lens and movement picked like on a real set." },
+      { id: "cinema", href: routes.cinema, name: "Shot Planner", text: "Camera, lens and movement picked like on a real set." },
       { id: "remix", href: routes.remix, name: "Remix", text: "Start from something you like and change it your way." },
       { id: "apps", href: routes.apps, name: "Apps", text: "One-click tools built on the models for common jobs." },
       { id: "library", href: routes.library, name: "Library", text: "Everything you have made, in folders, ready to download." },

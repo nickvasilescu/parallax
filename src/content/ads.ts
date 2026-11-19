@@ -1,9 +1,9 @@
 /**
- * Every word on the Ads Studio page (/ads). The layout comes from the design; the words are ours.
+ * Every word on the Ad Campaigns page (/ads). The layout comes from the design; the words are ours.
  */
 
 export const ads = {
-  title: "Ads Studio",
+  title: "Ad Campaigns",
   headline: { lit: "Write a script, choose a style", plain: "we make the ad" },
   placeholder: 'Write a script or describe your ad, e.g. "a 15s spot where a sleepy runner finds our coffee"…',
   copyNote: "Starter script from your product details. Edit it before you post.",
@@ -113,7 +113,7 @@ export const ads = {
     failed: "This one did not work.",
     refunded: "Your credits are back in your balance.",
     of: (i: number, n: number) => `${i} of ${n}`,
-    badge: "Ads Studio",
+    badge: "Ad Campaigns",
     win: "Mark as a winner",
     unwin: "No longer a winner",
   },

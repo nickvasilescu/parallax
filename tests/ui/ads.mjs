@@ -1,4 +1,4 @@
-// The Ads Studio from a first visit to a finished mock ad, a variation, and the sidebar actions.
+// The Ad Campaigns page from a first visit to a finished mock ad, a variation, and the sidebar actions.
 // Run it with: python3 tests/run.py tests/ui/ads.mjs
 // (the runner starts the app in mock mode and calls: node tests/ui/ads.mjs <base-url> <out-dir> [width] [height])
 import { launch, scenario } from "./browser.mjs";

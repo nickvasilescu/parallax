@@ -1,4 +1,4 @@
-// The Cinema studio from a first visit to a planned, shot and exported film.
+// The Shot Planner (/cinema) from a first visit to a planned, shot and exported film.
 // Run it with: python3 tests/run.py tests/ui/cinema.mjs
 // (the runner starts the app in mock mode and calls: node tests/ui/cinema.mjs <base-url> <out-dir> [width] [height])
 import { launch, scenario } from "./browser.mjs";

@@ -1,4 +1,4 @@
-# Library and Elements API
+# Library and reference sets API
 
 The member's own files, organised: a richer library listing, folders, bulk actions, a trash,
 and **elements** (named sets of reference images that drop straight into a model's
@@ -42,13 +42,13 @@ Writes from another site answer `403 forbidden`.
 
 | Screen | Calls |
 |---|---|
-| Sidebar counts (All, Images, Video, Audio, Favourites, Uploads, Folders, Elements, Trash) and storage meter | `GET /api/library/summary` |
+| Sidebar counts (All, Images, Video, Audio, Favourites, Uploads, Folders, Reference sets, Trash) and storage meter | `GET /api/library/summary` |
 | Grid with kind tabs, filters, search, sort, infinite scroll | `GET /api/library` |
 | Model filter list | `summary.models` (only models the member has used) |
 | Folder list, "Add to folder" menu | `GET /api/folders`, `POST /api/folders` |
 | Multi-select bar: favourite, move, delete, restore | `POST /api/library/bulk` |
 | Trash page: list, restore, restore all, delete for good, empty | `/api/library/trash*`, bulk |
-| Elements page and picker | `/api/elements*` |
+| Reference sets page and picker | `/api/elements*` |
 | Composer: "use this element" | `POST /api/elements/:id/resolve`, then `POST /api/jobs` |
 
 ---
@@ -227,7 +227,7 @@ To delete only some files for good, use bulk `delete`.
 
 ---
 
-## Elements
+## Reference sets (`/api/elements`)
 
 A named, reusable set of the member's own images: a **character**, an **object**, a **style**
 or a **place**. Use it to keep a person, product or look the same across generations.

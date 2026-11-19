@@ -1,4 +1,4 @@
-"""Cinema studio API test, mock mode. Usage: cinema.py <base-url>"""
+"""Shot Planner (/cinema) API test, mock mode. Usage: cinema.py <base-url>"""
 import http.cookiejar
 import json
 import sys

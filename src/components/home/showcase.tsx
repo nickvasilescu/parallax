@@ -235,7 +235,7 @@ export function ContestBanner() {
   );
 }
 
-/** "One canvas" banner, 300 tall. */
+/** The Boards banner, 300 tall. */
 export function CanvasBanner() {
   const b = banners.canvas;
   return (

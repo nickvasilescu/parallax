@@ -146,8 +146,8 @@ try {
       await b.until(`document.body.innerText.includes("The trash is empty")`, 8000, "trash empty");
     }],
     ["create an element from own pictures", async () => {
-      await side("Elements");
-      await b.click("main button", "New element");
+      await side("Reference sets");
+      await b.click("main button", "New reference set");
       await b.until(`document.querySelectorAll('[role="dialog"] li button').length >= 2`, 8000, "picture picker");
       await b.click('[role="dialog"] input[required]');
       await b.type("Harbour light");
