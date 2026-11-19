@@ -4,6 +4,14 @@ import { badRequest, clientKey, notFound, publicRoute, rateLimit, readJson } fro
 
 const HOUR = 3_600_000;
 
+/** Server-wide ceilings on new accounts, each of which starts with free credits. */
+const limit = (name: string, fallback: number) => {
+  const n = Math.floor(Number(process.env[name]));
+  return Number.isFinite(n) && n > 0 ? n : fallback;
+};
+const GUESTS_PER_HOUR = limit("PARALLAX_GUESTS_PER_HOUR", 200);
+const SIGNUPS_PER_HOUR = limit("PARALLAX_SIGNUPS_PER_HOUR", 100);
+
 /**
  * POST /api/auth/signup  { email, password, name? }   a guest who signs up keeps their work
  * POST /api/auth/login   { email, password }
@@ -18,16 +26,24 @@ export const POST = publicRoute<{ action: string }>(async ({ req, user, params }
     switch (params.action) {
       case "signup":
         rateLimit(`signup:${who}`, 10, HOUR);
+        // The address above comes from X-Forwarded-For, which a client can set. A server-wide
+        // ceiling bounds how many credit-carrying accounts can be made however it is spoofed.
+        rateLimit("signup:all", SIGNUPS_PER_HOUR, HOUR);
         body = await readJson(req);
         next = signUp({ email: body.email, password: body.password, name: body.name }, user);
         break;
       case "login":
         rateLimit(`login:${who}`, 20, HOUR / 4);
         body = await readJson(req);
+        // Per account as well as per address, so guessing one member's password stays slow.
+        rateLimit(`login-email:${String(body.email ?? "").trim().toLowerCase().slice(0, 254)}`, 10, HOUR / 4);
         next = logIn({ email: body.email, password: body.password });
         break;
       case "guest":
-        if (!user) rateLimit(`guest:${who}`, 10, HOUR);
+        if (!user) {
+          rateLimit(`guest:${who}`, 10, HOUR);
+          rateLimit("guest:all", GUESTS_PER_HOUR, HOUR);
+        }
         next = user ?? createGuest();
         break;
       case "logout":
