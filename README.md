@@ -96,7 +96,8 @@ Two things to know before you start:
 ## What is not real yet
 
 - **Payments.** There is no payment processor. The top-up button adds credits for free and
-  says so. Close it with `PARALLAX_DEMO_BILLING=off`.
+  says so. It is open by default only in mock mode; a live server keeps it closed unless
+  `PARALLAX_DEMO_BILLING=on`. Never turn it on for a public server.
 - **Supercomputer's live mode.** `SUPER_MODE=live` can start cloud computers and connect
   outside apps, and both can cost money. It has had far less testing than the studios.
 - **The Hermes engine against a real agent.** See above.
@@ -117,7 +118,7 @@ Everything is optional. Put them in `.env.local`.
 | `TREG_DAILY_BUDGET_USD` | Stop paid requests after this many dollars in 24 hours |
 | `PARALLAX_DATA_DIR` | Where the database and files live. Default `./data` |
 | `PARALLAX_DEMO_SEED` | `1` adds the demo accounts and posts to a new data folder |
-| `PARALLAX_DEMO_BILLING` | `off` closes the free top-up button |
+| `PARALLAX_DEMO_BILLING` | `on` opens the free top-up button and free plan changes on a live server (they are open by default in mock mode only); `off` closes them everywhere |
 | `PARALLAX_ORIGIN` | The public address of the app when it runs behind a proxy or a public link, for example `https://parallax.example.com`. The server writes its links with it and accepts requests from pages at that address |
 | `COOKIE_SECURE` | `1` when serving over https |
 | `SUPER_MODE` | `live` lets Supercomputer use the three keys below |

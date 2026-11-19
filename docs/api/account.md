@@ -198,8 +198,9 @@ Errors: `400` (no `DELETE`), `400`/`403 wrong_password`, `500 delete_failed` (no
 ## Plans and subscription
 
 There is **no real payment**. Billing goes through a `BillingProvider`; the only one is `demo`,
-which approves at once and writes a receipt. It is on unless the server runs with
-`PARALLAX_DEMO_BILLING=off`. When it is off, every plan change answers
+which approves at once and writes a receipt. It is on by default in mock mode only. A live
+server (one with a gateway key) turns it on only with `PARALLAX_DEMO_BILLING=on`, and
+`PARALLAX_DEMO_BILLING=off` closes it everywhere. When it is off, every plan change answers
 `503 billing_closed` "Plan changes are not open yet…"; reading plans, cancel and resume still work.
 There is no card form and none should be built.
 

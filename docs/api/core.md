@@ -710,7 +710,8 @@ Auth: signed in (guest ok). Body (JSON): `{ "packId": "pack-100" }`, an `id` fro
 
 There is no payment step yet. The pack's credits are added for free and recorded as a
 `topup` entry with the note "100 credits (demo top-up)". Label the button as a demo. When
-`demoBilling` is `false` this endpoint is closed; hide the buy buttons.
+`demoBilling` is `false` this endpoint is closed (`403`); hide the buy buttons. Demo billing is
+open by default only in mock mode; a live server opens it only with `PARALLAX_DEMO_BILLING=on`.
 
 Response `200`:
 ```json

@@ -2,6 +2,7 @@ import "server-only";
 
 import { newId, run } from "@/server/db";
 import { ApiError } from "@/server/errors";
+import { tregMode } from "@/server/treg";
 import type { Interval } from "./plans";
 
 /**
@@ -50,8 +51,17 @@ export const demoProvider: BillingProvider = {
   },
 };
 
+/**
+ * Demo billing hands out credits for free (top-ups, plan upgrades and their monthly credits).
+ * Credits buy real generations once a gateway key is set, so it is open by default only in
+ * mock mode. A live server opens it only with PARALLAX_DEMO_BILLING=on (or 1). `off` closes it
+ * everywhere.
+ */
 export function demoBillingOn(): boolean {
-  return process.env.PARALLAX_DEMO_BILLING !== "off";
+  const v = (process.env.PARALLAX_DEMO_BILLING ?? "").trim().toLowerCase();
+  if (v === "off" || v === "0") return false;
+  if (v === "on" || v === "1") return true;
+  return tregMode() === "mock";
 }
 
 /** The provider in use, or null when billing is closed. */

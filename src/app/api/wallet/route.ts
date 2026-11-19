@@ -1,4 +1,5 @@
 import { planOf, TOPUP_PACKS } from "@/config/economy";
+import { demoBillingOn } from "@/server/account/billing";
 import { syncSubscription } from "@/server/account/subscription";
 import { userById } from "@/server/auth";
 import { balance, history } from "@/server/credits";
@@ -14,7 +15,7 @@ export const GET = route(({ req, user: signedIn }) => {
     balance: balance(user.id),
     plan: planOf(user.plan),
     packs: TOPUP_PACKS,
-    demoBilling: process.env.PARALLAX_DEMO_BILLING !== "off",
+    demoBilling: demoBillingOn(),
     history: rows.map((r) => ({ id: r.id, kind: r.kind, amount: r.amount, note: r.note ?? "", jobId: r.job_id, createdAt: r.created_at })),
   };
 });
