@@ -94,28 +94,27 @@ export const navStudios: NavLink[] = [
 ];
 
 /**
- * Shown beside "Pricing" and "Upgrade". It is the real saving from paying yearly
- * (ten months charged for twelve, see src/server/account/plans.ts). Empty hides it.
+ * An optional badge beside "Pricing" and "Upgrade", for example the yearly saving
+ * (see src/server/account/plans.ts). Empty hides it, which is the default.
  */
-export const pricingBadge = "-17%";
+export const pricingBadge = "";
 
 /**
- * The strip above the nav. It counts down to `endsAt` and removes itself after that.
- * Set `enabled` to false to drop it.
+ * An optional offer strip above the nav, with a countdown to `endsAt`. It is off by default
+ * and everything below is placeholder text, not a real offer.
  *
- * Keep it true. The countdown is real: the code below is seeded by
- * migrations/100_launch.sql with the same end time, and the server refuses it afterwards.
- * To run a new offer, add a migration with the new code and change `id`, `code` and `endsAt`.
+ * To run an offer: add a migration that seeds the promo code (with the same end time, so the
+ * countdown is the real deadline), then set `enabled`, `id`, `code`, `endsAt` and `text`.
  */
 export const promo = {
-  enabled: true,
+  enabled: false,
   /** Change this when the offer changes, so people who closed the last one see the new one. */
-  id: "launch-week-2026-11",
-  endsAt: "2026-11-20T08:00:00Z",
-  code: "LAUNCH-WEEK",
+  id: "sample-offer",
+  endsAt: "2000-01-01T00:00:00Z",
+  code: "SAMPLE-CODE",
   countdownLabel: "Offer ends in",
-  /** Reads as: "Launch week: code LAUNCH-WEEK adds 100 free credits on [logo] Parallax". */
-  text: "Launch week: code LAUNCH-WEEK adds 100 free credits on",
+  /** Reads as: "Sample offer: code SAMPLE-CODE adds free credits on [logo] Parallax". */
+  text: "Sample offer: code SAMPLE-CODE adds free credits on",
   cta: { label: "Create your free account", href: routes.join },
   /** For someone who already has an account: straight to the code field in their wallet. */
   memberCta: { label: "Enter your code", href: `${routes.wallet}#promo` },

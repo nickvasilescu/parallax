@@ -7,7 +7,8 @@ import { brand } from "@/config/brand";
 
 export const pricingCopy = {
   offer: {
-    lineOne: "Launch week is on",
+    // Only shown while `promo` in site.ts is enabled. Placeholder text.
+    lineOne: "Sample offer",
     lineTwoLead: "Redeem code",
     countdownLabel: "Offer ends in...",
     units: { hours: "hours", minutes: "minutes", seconds: "seconds" },

@@ -35,12 +35,8 @@ try {
       if (shown !== want) throw new Error(`card shows ${shown}, server says ${want}`);
       return shown;
     }],
-    ["the offer banner counts down", async () => {
-      await b.until(`!!document.querySelector('[role="timer"]')`, 5000, "the countdown");
-      const a = await b.evaluate(`document.querySelector('[role="timer"]').innerText`);
-      await b.sleep(1300);
-      const c = await b.evaluate(`document.querySelector('[role="timer"]').innerText`);
-      if (a === c) throw new Error("countdown did not tick");
+    ["no offer banner unless an offer is configured", async () => {
+      if (await b.evaluate(`!!document.querySelector('[role="timer"]')`)) throw new Error("an offer countdown is showing");
     }],
     ["no sideways scroll", noSideways],
     ["monthly switch changes the prices", async () => {

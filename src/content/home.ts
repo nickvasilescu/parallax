@@ -31,16 +31,19 @@ export const carouselWords = {
   goTo: (n: number, of: number) => `Slide ${n} of ${of}`,
 };
 
-/** The launch offer card. The code, end time and link come from `promo` in site.ts. */
+/**
+ * The offer card. The code, end time and link come from `promo` in site.ts. The offer is off
+ * by default, so the card shows `after`; the offer lines are placeholders.
+ */
 export const promoCard = {
   timerLabel: "Offer ends in",
-  lineOne: "Launch week",
-  lineTwo: "100 free credits",
+  lineOne: "Sample offer",
+  lineTwo: "Free credits",
   body: (code: string) =>
-    `Create your free account and enter the code ${code} to add 100 credits for any studio: images, video, voices and music.`,
+    `Sample text: create your free account and enter the code ${code} to add credits for any studio.`,
   /** The same offer, said to someone who already has an account. */
   memberBody: (code: string) =>
-    `Enter the code ${code} in your wallet to add 100 credits for any studio: images, video, voices and music.`,
+    `Sample text: enter the code ${code} in your wallet to add credits for any studio.`,
   sticker: (code: string) => ["Use code", code],
   /** Shown instead once the offer is over. */
   after: {
