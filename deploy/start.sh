@@ -9,7 +9,8 @@
 # Everything this script keeps lives in deploy/run/ (ignored by git):
 #   data/          the database and the files people make
 #   server.log     the log
-#   env            optional extra settings, one NAME=value per line
+#   env            optional extra settings, one NAME=value per line. A Hermes engine (below)
+#                  answers nobody until this lists AGENT_ALLOWED_EMAILS=you@example.com
 #   origin.txt     optional: the public https address, if the app sits behind a link or proxy
 #   engine/        optional: run the agent chat on a Hermes agent (see docs/hermes-on-orgo.md)
 #     hermes-api.key   the agent's API key

@@ -47,7 +47,7 @@ music models, each with its own controls and an exact price shown before you pre
 `TREG_DAILY_BUDGET_USD` stops paid requests once that much was spent in 24 hours (default 5
 dollars). Keep it low while you try things out.
 
-## The agent, on a Hermes agent, on Orgo
+## The agent chat, on Hermes and Orgo
 
 The agent chat lives at `/agent`. It can run on three things:
 
@@ -69,12 +69,14 @@ pays with their own credits. The generation key never leaves Parallax.
 turn on the agent's API server, make two secrets, join the machines, add one entry to the
 agent's config, start Parallax. It also lists what to build next.
 
-Two things to know before you start:
+Three things to know before you start:
 
 - The engine is tested end to end against a stand-in agent. It has not been run against a
   live Hermes agent yet. If you try it, please open an issue with what you found.
 - The agent's own tools (shell, files, memory) are **not** behind Parallax's approval cards.
   Do not point a public Parallax at a personal agent. The guide explains the safe setup.
+- A live agent (the Hermes engine, or `AGENT_MODE=live`) answers nobody until you list who may
+  use it in `AGENT_ALLOWED_EMAILS`. Guests never can.
 
 ## What is in it
 
@@ -121,6 +123,7 @@ Everything is optional. Put them in `.env.local`.
 | `TREG_DAILY_BUDGET_USD` | Stop paid requests after this many dollars in 24 hours. Default `5`; a value that is not a number also means `5` |
 | `PARALLAX_DATA_DIR` | Where the database and files live. Default `./data` |
 | `PARALLAX_DEMO_SEED` | `1` adds the demo accounts and posts to a new data folder |
+| `PARALLAX_GUESTS_PER_HOUR`, `PARALLAX_SIGNUPS_PER_HOUR` | Server-wide caps on new guest accounts (default 200) and sign-ups (default 100) per hour, since each starts with free credits |
 | `PARALLAX_DEMO_BILLING` | `on` opens the free top-up button and free plan changes on a live server (they are open by default in mock mode only); `off` closes them everywhere |
 | `PARALLAX_ORIGIN` | The public address of the app when it runs behind a proxy or a public link, for example `https://parallax.example.com`. The server writes its links with it and accepts requests from pages at that address |
 | `COOKIE_SECURE` | `1` when serving over https |
