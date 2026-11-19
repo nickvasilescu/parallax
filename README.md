@@ -61,9 +61,10 @@ With the Hermes engine, the agent does the thinking and Parallax gives it the st
 over MCP. When the agent wants a picture, the member gets an approval card with the price and
 pays with their own credits. The generation key never leaves Parallax.
 
-![A chat running on a Hermes engine](docs/screenshots/agent-hermes.png)
+![An agent chat with an approval card and a result](docs/screenshots/agent-chat.png)
 
-*The chat above ran in the test setup: a stand-in agent and a sample picture.*
+*The chat above ran in mock mode: the scripted stand-in agent and a sample picture. On the
+Hermes engine the same cards appear.*
 
 **Set it up: [`docs/hermes-on-orgo.md`](docs/hermes-on-orgo.md).** It is a step-by-step guide:
 turn on the agent's API server, make two secrets, join the machines, add one entry to the
