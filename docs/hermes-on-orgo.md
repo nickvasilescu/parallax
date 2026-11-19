@@ -184,6 +184,13 @@ SUPER_ENGINE_TOKEN_FILE=/absolute/path/to/engine.token
 SUPER_ENGINE_NAME=Hermes
 ```
 
+A live agent is closed to everyone until you name who may use it. Add your own account's
+email (comma separate several; `*` means every signed-in member, never guests):
+
+```bash
+AGENT_ALLOWED_EMAILS=you@example.com
+```
+
 ## Step 6. Try it
 
 1. Open `/supercomputer` and send: *"Make me a poster of a lighthouse at dusk."*

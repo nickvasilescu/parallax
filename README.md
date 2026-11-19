@@ -124,6 +124,7 @@ Everything is optional. Put them in `.env.local`.
 | `SUPER_MODE` | `live` lets Supercomputer use the three keys below |
 | `ANTHROPIC_API_KEY`, `ORGO_API_KEY`, `COMPOSIO_API_KEY` | The agent's model, its cloud computer, and its app connections |
 | `SUPER_ENGINE` | `hermes` runs the Supercomputer chat on a Hermes agent instead of the built-in loop |
+| `AGENT_ALLOWED_EMAILS` | Who may chat while the agent is live (a live service or the Hermes engine): emails, comma separated, or `*` for every signed-in member. Guests never. Unset means nobody |
 | `HERMES_URL`, `HERMES_API_KEY_FILE`, `SUPER_ENGINE_TOKEN_FILE`, `SUPER_ENGINE_NAME` | Where the agent is, its key, the token it uses to call Parallax's tools, and the name members see |
 
 ## Run it for real

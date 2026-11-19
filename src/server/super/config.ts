@@ -1,6 +1,7 @@
 import "server-only";
 
 import { readFileSync } from "node:fs";
+import { ApiError } from "../errors";
 
 /**
  * Settings for the agent chat. Each outside service is live only when SUPER_MODE=live
@@ -80,6 +81,35 @@ export function hermesEngine(): HermesEngine | null {
     name: (process.env.SUPER_ENGINE_NAME?.trim() || "Hermes").slice(0, 40),
     mcpName: (process.env.HERMES_MCP_NAME?.trim() || "parallax").replace(/[^A-Za-z0-9_]/g, "_"),
   };
+}
+
+/**
+ * True when a chat turn can reach something that costs the operator money or runs code for
+ * them: a live model, a cloud computer, app connections, or a Hermes agent with its own tools.
+ */
+export function agentLive(): boolean {
+  return hermesEngine() !== null || (Object.keys(KEYS) as Service[]).some((s) => serviceMode(s) === "live");
+}
+
+/**
+ * Who may use the agent while it is live. AGENT_ALLOWED_EMAILS lists member emails, comma
+ * separated, or "*" for every signed-in member. Guests never qualify. Unset means nobody: a
+ * live agent stays closed until the operator names who may use it. In mock mode everyone may.
+ */
+export function agentAllowed(user: { email: string | null; isGuest: boolean }): boolean {
+  if (!agentLive()) return true;
+  if (user.isGuest || !user.email) return false;
+  const list = (process.env.AGENT_ALLOWED_EMAILS ?? "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+  return list.includes("*") || list.includes(user.email.toLowerCase());
+}
+
+export const AGENT_RESTRICTED = "The live agent on this server is open only to members the operator has approved.";
+
+export function requireAgentAccess(user: { email: string | null; isGuest: boolean }) {
+  if (!agentAllowed(user)) throw new ApiError(403, "agent_restricted", AGENT_RESTRICTED);
 }
 
 function num(name: string, fallback: number, min: number, max: number): number {

@@ -593,6 +593,7 @@ engine.
 |---|---|---|
 | `SUPER_MODE` | (mock) | `live` turns on each service whose key is set |
 | `SUPER_ENGINE` | (built-in) | `hermes` runs the chat on a Hermes agent. Works with any `SUPER_MODE` |
+| `AGENT_ALLOWED_EMAILS` | (nobody) | Who may chat while the agent is live (any live service, or the Hermes engine): member emails, comma separated, or `*` for every signed-in member. Guests never. Unset means nobody. In mock mode everyone may. Others get `403 agent_restricted` |
 | `HERMES_URL` | | The agent's API server, for example `http://127.0.0.1:8642` |
 | `HERMES_API_KEY` or `HERMES_API_KEY_FILE` | | The agent's API key, or a file that holds it |
 | `SUPER_ENGINE_TOKEN` or `SUPER_ENGINE_TOKEN_FILE` | | The token the agent sends to `/api/super/mcp`. At least 24 characters |

@@ -4,7 +4,7 @@ import { ownedAsset, toAsset } from "@/server/assets";
 import { userById, type User } from "@/server/auth";
 import { all, get, newId, parseJson, run } from "@/server/db";
 import { ApiError, badRequest } from "@/server/errors";
-import { hermesEngine, limits, resolveLlmModel, type Mode } from "./config";
+import { AGENT_RESTRICTED, agentAllowed, hermesEngine, limits, requireAgentAccess, resolveLlmModel, type Mode } from "./config";
 import { suspendIdle } from "./computer";
 import { runHermesTurn } from "./hermes";
 import { listMemories, ownedProject, usableSkills } from "./library";
@@ -136,6 +136,7 @@ export interface PostInput {
 const MAX_QUEUED = 5;
 
 export function postMessage(user: User, chatId: string, input: PostInput, origin: string) {
+  requireAgentAccess(user);
   const chat = ownedChat(user.id, chatId);
   const files = input.fileIds.map((id) => toAsset(ownedAsset(user.id, id)));
   const queued = get<{ n: number }>("SELECT COUNT(*) AS n FROM super_turns WHERE chat_id = ? AND status = 'queued'", chatId)!.n;
@@ -269,6 +270,13 @@ async function runTurn(turn: TurnRow, abort: AbortController) {
   let status: TurnRow["status"] = "done";
   let error: string | null = null;
   try {
+    // Checked again here: a turn may have been queued (or scheduled) before access changed.
+    if (!agentAllowed(user)) {
+      status = "failed";
+      error = "agent_restricted";
+      addRow(chatId, "notice", { level: "error", code: "agent_restricted", text: AGENT_RESTRICTED });
+      return;
+    }
     const engine = hermesEngine();
     if (engine) {
       let steps = 0;

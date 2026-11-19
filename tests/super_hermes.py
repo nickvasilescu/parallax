@@ -307,7 +307,7 @@ class Agent(http.server.BaseHTTPRequestHandler):
 
 def boot(log, **extra):
     env = dict(os.environ, TREG_MODE="mock", SUPER_MODE="mock", MOCK_DELAY_MS="300", PARALLAX_DATA_DIR=DATA, PARALLAX_DEMO_BILLING="1",
-               SUPER_ENGINE="hermes", HERMES_URL=f"http://127.0.0.1:{FAKE_PORT}/", SUPER_ENGINE_NAME="Doug", **extra)
+               SUPER_ENGINE="hermes", HERMES_URL=f"http://127.0.0.1:{FAKE_PORT}/", SUPER_ENGINE_NAME="Doug", AGENT_ALLOWED_EMAILS="*", **extra)
     return subprocess.Popen(["node", "node_modules/next/dist/bin/next", "start", "-p", PORT], cwd=APP, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
 
 
@@ -476,6 +476,12 @@ try:
 
     s, out = call("POST", "/api/super/chats", {})
     cid = out["chat"]["id"]
+
+    # --- who may use a live agent ---
+    s, out = send(cid, "hello there")
+    check("access: a guest cannot use a live agent", s == 403 and out.get("error", {}).get("code") == "agent_restricted", f"{s} {out}")
+    s, out = call("POST", "/api/auth/signup", {"email": f"hermes-{int(time.time())}@example.com", "password": "hermes-pass-1234", "name": "Hermes Tester"})
+    check("access: the guest signs up and keeps the chat", s == 200, f"{s} {out}")
 
     # --- a plain reply ---
     new = turn(cid, "hello there")
