@@ -6,6 +6,9 @@ One web app: studios for pictures, video, voices and music, tools built on top o
 community feed, a library, credits, an API for developers, and an agent that
 plans and makes things for you.
 
+> Parallax is an independent, unofficial, experimental project. Read the
+> [Disclaimer](#disclaimer) before you deploy it or publish what it makes.
+
 ![The Parallax home page](docs/screenshots/home.png)
 
 It runs with `npm run dev` and nothing else installed. The database is one SQLite file, and
@@ -181,10 +184,24 @@ the same ones the agents worked from.
 
 Read [`CONTRIBUTING.md`](CONTRIBUTING.md). Agents: read [`AGENTS.md`](AGENTS.md) first.
 
+## Disclaimer
+
+- **Independent and unofficial.** Parallax is an independent open-source project. It is not
+  affiliated with, endorsed by or sponsored by any commercial AI studio, model provider or
+  other company whose products or services it mentions or connects to. Model and provider
+  names are trademarks of their respective owners and are used only to identify the models
+  the app can call.
+- **Original code and sample media.** The code in this repository was written for this
+  project. The demo pictures and clips are AI-generated samples, included only to show the
+  interface. If you believe a file here infringes your rights, report it privately (see
+  [`SECURITY.md`](SECURITY.md)) and it will be reviewed and removed if needed.
+- **Educational and experimental.** Parallax is provided "as is", without warranty of any
+  kind, under the [MIT License](LICENSE). It has not been audited for production use.
+- **Your responsibility.** If you run it, you are responsible for your own keys and the costs
+  they run up; for what you and your users generate and publish; for following each model
+  provider's terms and the law that applies to you, including rights of likeness, privacy and
+  copyright in generated media; and for moderating any public instance.
+
 ## Licence
 
 [MIT](LICENSE).
-
-Parallax is an independent project. It is not affiliated with, endorsed by, or sponsored by
-any company whose models, products or services it mentions or connects to. Model and product
-names belong to their owners. The pictures in this repository were made with Parallax.

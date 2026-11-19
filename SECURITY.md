@@ -1,17 +1,43 @@
 # Security
 
-Parallax is young software. Treat it as a starting point, not a hardened service.
+Parallax is young, experimental software. Treat it as a starting point, not a hardened
+service.
 
-**Reporting a problem.** Please do not open a public issue for a security problem. Use
-GitHub's "Report a vulnerability" button on this repository (Security tab), and include the
-steps to reproduce it.
+## Reporting a vulnerability
 
-**Before you put it on the internet**
+Report it privately with GitHub's **Report a vulnerability** button (the **Security** tab of
+this repository). Include the steps to reproduce it, what an attacker could do, and the commit
+you tested.
 
-- Serve it over HTTPS and set `COOKIE_SECURE=1` and `PARALLAX_ORIGIN`.
-- Set `TREG_DAILY_BUDGET_USD`. It caps what the server can spend in a day.
-- Payments are not connected. Credits are granted by the app itself; do not sell them.
-- If the agent runs on a Hermes agent, read the warning in
-  [`docs/hermes-on-orgo.md`](docs/hermes-on-orgo.md): the agent's own tools are not behind
-  Parallax's approval cards. Use a narrow agent for anything public.
-- Keys live in `.env.local` or in files named by `*_FILE` settings. Never commit them.
+Please do not post vulnerabilities in YouTube comments, public issues, discussions or social
+media. The same private channel works for anything else that should not be public, such as a
+file you believe infringes your rights.
+
+## Supported versions
+
+Only the `main` branch is supported. There are no releases or backports. Responses are best
+effort: there is no bounty and no guaranteed response time.
+
+## Deploying safely
+
+- **Never run a public instance with the free top-up on.** Demo billing (free top-ups and
+  plan upgrades) is closed by default once a gateway key is set. Do not set
+  `PARALLAX_DEMO_BILLING=on` on anything other people can reach.
+- **Set a low daily budget.** `TREG_DAILY_BUDGET_USD` (default 5) caps what the server spends
+  in 24 hours. Set a spending cap at the gateway as well.
+- **Put an auth layer in front.** Guests and sign-ups are open, and each new account starts
+  with free credits. On the internet, run Parallax behind a proxy that requires sign-in (or on
+  a private network), serve it over HTTPS, and set `COOKIE_SECURE=1` and `PARALLAX_ORIGIN`.
+  `deploy/start.sh` listens on `127.0.0.1` unless you set `BIND`.
+- **Keep the gateway key server-side.** `TREG_TOKEN` and the other keys belong in
+  `.env.local`, the server's environment, or files named by `*_FILE` settings. Never put them
+  in client code, a `NEXT_PUBLIC_*` variable, a commit, a log or an issue.
+- **Never point a public instance at a personal agent.** A Hermes agent's own tools (shell,
+  files, memory) are not behind Parallax's approval cards. Use a narrow agent on its own
+  machine (see [`docs/hermes-on-orgo.md`](docs/hermes-on-orgo.md)). A live agent is closed
+  until you list who may use it in `AGENT_ALLOWED_EMAILS`; keep that list short.
+- **Use computer-scoped Orgo keys.** Give Parallax an Orgo key limited to the computers it
+  needs, never an account-wide key.
+- **Never show keys on screen.** When you record, stream or take screenshots, keep
+  `.env.local`, terminal output and the new-key dialog out of view. Rotate any key that was
+  shown.
