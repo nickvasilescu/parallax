@@ -15,7 +15,18 @@ export type LoginMode = "login" | "join";
 export function safeNext(next: string | null | undefined): string | null {
   if (!next || typeof next !== "string") return null;
   if (!next.startsWith("/") || next.startsWith("//") || next.startsWith("/\\")) return null;
-  return next;
+  // URL parsing drops tabs and newlines and reads "\\" as "/", so "/\t/evil.example" would
+  // still leave the site. Parse it the way the browser will and keep it only if it stays here.
+  const base = "https://parallax.invalid";
+  try {
+    const url = new URL(next, base);
+    if (url.origin !== base) return null;
+    const path = url.pathname + url.search + url.hash;
+    // "/.//host" normalises to "//host", which a browser would read as another site.
+    return path.startsWith("//") ? null : path;
+  } catch {
+    return null;
+  }
 }
 
 /* Sizes from the design: a 48-high row, 12 radius, the faint white fill. */
