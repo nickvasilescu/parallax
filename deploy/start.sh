@@ -18,14 +18,16 @@
 #     url.txt          where the agent's API is (default: this machine's end of tunnel.sh)
 #     off              an empty file with this name turns the engine off
 #
-# PORT (default 3000) and BIND (default 0.0.0.0) can be set when calling the script.
+# PORT (default 3000) and BIND (default 127.0.0.1) can be set when calling the script. The
+# default only answers this machine (put a proxy with https and sign-in in front). Set
+# BIND=0.0.0.0 only if you mean to expose the port directly.
 set -euo pipefail
 
 DEPLOY_DIR="$(cd "$(dirname "$0")" && pwd)"
 APP_DIR="$(cd "$DEPLOY_DIR/.." && pwd)"
 RUN_DIR="$DEPLOY_DIR/run"
 PORT="${PORT:-3000}"
-BIND="${BIND:-0.0.0.0}"
+BIND="${BIND:-127.0.0.1}"
 
 if [ ! -d "$APP_DIR/.next" ]; then echo "not built yet: run npm ci && npm run build"; exit 1; fi
 mkdir -p "$RUN_DIR"
