@@ -41,8 +41,8 @@ Models are reached through one gateway, [treg.to](https://treg.to). Copy `.env.e
 `.env.local` and set `TREG_TOKEN`. The app then runs in live mode: 39 image, video, voice and
 music models, each with its own controls and an exact price shown before you press Generate.
 
-`TREG_DAILY_BUDGET_USD` stops paid requests once that much was spent in 24 hours. Keep it low
-while you try things out.
+`TREG_DAILY_BUDGET_USD` stops paid requests once that much was spent in 24 hours (default 5
+dollars). Keep it low while you try things out.
 
 ## Supercomputer, on a Hermes agent, on Orgo
 
@@ -115,7 +115,7 @@ Everything is optional. Put them in `.env.local`.
 |---|---|
 | `TREG_TOKEN` | The gateway key. Without it the app runs in mock mode |
 | `TREG_MODE` | Force `mock` or `live` |
-| `TREG_DAILY_BUDGET_USD` | Stop paid requests after this many dollars in 24 hours |
+| `TREG_DAILY_BUDGET_USD` | Stop paid requests after this many dollars in 24 hours. Default `5`; a value that is not a number also means `5` |
 | `PARALLAX_DATA_DIR` | Where the database and files live. Default `./data` |
 | `PARALLAX_DEMO_SEED` | `1` adds the demo accounts and posts to a new data folder |
 | `PARALLAX_DEMO_BILLING` | `on` opens the free top-up button and free plan changes on a live server (they are open by default in mock mode only); `off` closes them everywhere |

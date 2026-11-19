@@ -153,6 +153,19 @@ function spentToday(): number {
   )!.usd;
 }
 
+/** Default for TREG_DAILY_BUDGET_USD: low, so a forgotten setting cannot run up a large bill. */
+export const DEFAULT_DAILY_BUDGET_USD = 5;
+
+/**
+ * The most provider spend allowed in 24 hours, in dollars. A missing or unreadable value
+ * falls back to the default rather than to "no limit"; 0 stops paid requests.
+ */
+export function dailyBudgetUsd(): number {
+  const raw = process.env.TREG_DAILY_BUDGET_USD?.trim();
+  const n = raw ? Number(raw) : NaN;
+  return Number.isFinite(n) && n >= 0 ? n : DEFAULT_DAILY_BUDGET_USD;
+}
+
 export interface SubmitInput {
   modelId?: unknown;
   prompt?: unknown;
@@ -209,23 +222,6 @@ export function submitJobs(user: User, input: SubmitInput): Job[] {
   const quote = quoteJob(model, { prompt, values, media, filled, count: model.batch.native ? asked : Math.min(asked, MAX_BATCH) });
   if (!catalogEndpoint(quote.request.endpoint)) throw new ApiError(409, "model_unavailable", `${model.name} is not available right now.`);
 
-  const have = balance(user.id);
-  if (have < quote.millicredits) {
-    throw new ApiError(402, "insufficient_credits", `This needs ${formatCredits(quote.millicredits)} credits and you have ${formatCredits(Math.max(0, have))}.`);
-  }
-
-  const plan = planOf(user.plan);
-  if (activeCount(user.id) + quote.jobs > plan.concurrency) {
-    throw new ApiError(429, "too_many_jobs", `You can run ${plan.concurrency} at once on the ${plan.name} plan. Wait for one to finish.`);
-  }
-
-  if (tregMode() === "live") {
-    const cap = Number(process.env.TREG_DAILY_BUDGET_USD ?? 10);
-    if (Number.isFinite(cap) && spentToday() + quote.usdPerJob * quote.jobs > cap) {
-      throw new ApiError(503, "model_unavailable", "Generation is paused for today. Try again tomorrow.");
-    }
-  }
-
   const surface = typeof input.surface === "string" && /^[a-z0-9-]{1,40}$/.test(input.surface) ? input.surface : (model.surfaces[0] ?? model.kind);
   const metaText = isRecord(input.meta) ? JSON.stringify(input.meta) : "{}";
   const inputIds = JSON.stringify(Object.fromEntries(Object.entries(files).map(([slot, list]) => [slot, list.map((a) => a.id)])));
@@ -235,6 +231,21 @@ export function submitJobs(user: User, input: SubmitInput): Job[] {
   const ids: string[] = [];
 
   tx(() => {
+    // Checked inside the write transaction, so two requests cannot both spend the same credits.
+    const have = balance(user.id);
+    if (have < quote.millicredits) {
+      throw new ApiError(402, "insufficient_credits", `This needs ${formatCredits(quote.millicredits)} credits and you have ${formatCredits(Math.max(0, have))}.`);
+    }
+
+    const plan = planOf(user.plan);
+    if (activeCount(user.id) + quote.jobs > plan.concurrency) {
+      throw new ApiError(429, "too_many_jobs", `You can run ${plan.concurrency} at once on the ${plan.name} plan. Wait for one to finish.`);
+    }
+
+    if (tregMode() === "live" && spentToday() + quote.usdPerJob * quote.jobs > dailyBudgetUsd()) {
+      throw new ApiError(503, "model_unavailable", "Generation is paused for today. Try again tomorrow.");
+    }
+
     for (let i = 0; i < quote.jobs; i++) {
       const id = newId("job");
       ids.push(id);
